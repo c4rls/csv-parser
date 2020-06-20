@@ -1,18 +1,24 @@
 class CSV {
+  labels: any[];
+
+  lines: any[];
+
+  size: number;
+
   constructor() {
     this.labels = [];
     this.lines = [];
     this.size = 0;
   }
 
-  readString(str, separator = ",") {
+  readString(str: string, separator = ',') {
     const lines = [];
     const textLines = str.split(/\n/);
 
-    textLines.forEach((textLine) => {
+    textLines.forEach(textLine => {
       const fields = textLine.split(separator);
       const line = [];
-      fields.forEach((field) => {
+      fields.forEach(field => {
         line.push(field);
       });
 
@@ -23,4 +29,4 @@ class CSV {
   }
 }
 
-module.exports = CSV;
+export default CSV;
