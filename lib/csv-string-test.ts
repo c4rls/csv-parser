@@ -1,4 +1,4 @@
-module.exports = `
+const csvString = `
 carlos,18,male,1.70
 carlos,18,male,1.70
 carlos,18,male,1.70
@@ -120,3 +120,5 @@ carlos,18,male,1.70
 carlos,18,male,1.70
 carlos,18,male,1.70
 `.trim();
+
+export default csvString;

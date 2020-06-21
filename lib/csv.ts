@@ -1,7 +1,7 @@
 class CSV {
-  labels: any[];
+  labels: string[];
 
-  lines: any[];
+  lines: string[][];
 
   size: number;
 
@@ -11,21 +11,49 @@ class CSV {
     this.size = 0;
   }
 
-  readString(str: string, separator = ',') {
-    const lines = [];
-    const textLines = str.split(/\n/);
+  readString(
+    input: string,
+    separator = ',',
+    labels: 'first-line' | 'auto' | string[] = 'first-line',
+  ) {
+    const lines: string[][] = [];
+    let headLabels: string[] = [];
+    const textLines = input.split(/\n/);
 
     textLines.forEach(textLine => {
       const fields = textLine.split(separator);
-      const line = [];
-      fields.forEach(field => {
-        line.push(field);
-      });
-
-      lines.push(line);
+      lines.push(fields);
     });
 
+    if (Array.isArray(labels)) {
+      const firstLine = lines[0];
+
+      if (labels.length === firstLine.length) headLabels = labels;
+      else throw new Error('array of labels is not the size of a line');
+    }
+
+    if (labels === 'first-line') headLabels = lines.shift();
+
+    if (labels === 'auto') {
+      const firstLine = lines[0];
+      if (firstLine.length)
+        headLabels = firstLine.map((v, index) => index.toString());
+    }
+
+    this.labels = headLabels;
     this.lines = lines;
+    this.size = lines.length;
+  }
+
+  toJSON(withLabels = true) {
+    const { lines } = this;
+    let result = [];
+
+    if (withLabels) result.push(this.labels);
+
+    result = result.concat(lines);
+
+    return result;
   }
 }
 

@@ -10,7 +10,7 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "",
-    "start": ""
+    "start": "sucrase-node index.ts"
   },
   "husky": {
     "hooks": {
@@ -39,8 +39,10 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
+    "jest": "^26.0.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
+    "sucrase": "^3.15.0",
     "typescript": "^3.9.5"
   }
 }
