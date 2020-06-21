@@ -6,5 +6,5 @@
     "outDir": "./dist"
   },
   "include": ["./lib/**/*", "index.ts"],
-  "exclude": ["node_modules", ".yarn"]
+  "exclude": ["node_modules", ".yarn", "**/*.test.ts"]
 }

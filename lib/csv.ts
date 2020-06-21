@@ -1,3 +1,8 @@
+interface readStringConfig {
+  separator?: string;
+  labels?: 'first-line' | 'auto' | string[];
+}
+
 class CSV {
   labels: string[];
 
@@ -13,8 +18,7 @@ class CSV {
 
   readString(
     input: string,
-    separator = ',',
-    labels: 'first-line' | 'auto' | string[] = 'first-line',
+    { separator = ',', labels = 'first-line' }: readStringConfig,
   ) {
     const lines: string[][] = [];
     let headLabels: string[] = [];
